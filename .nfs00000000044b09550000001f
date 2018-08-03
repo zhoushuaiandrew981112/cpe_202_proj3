@@ -69,21 +69,32 @@ def combine_nodes(tree_a, tree_b):
 
 def create_tree(freq_lst):
     node_lst = []
-    for freq in range(0, len(freq_lst)):
+    for freq in range(0, len(freq_lst) - 1):
         if freq_lst[freq] > 0:
             n = HuffmanNode(chr(freq), freq_lst[freq])
+            #n = HuffmanNode(freq, freq_lst[freq])
             node_lst.append(n)
     node_lst.sort()
     if len(node_lst) == 0:
         return None
     elif len(node_lst) == 1:
-        return node_lst[0] 
+        return node_lst.pop(0) 
     while len(node_lst) >= 2:
+        display(node_lst)
+        print("====first")
         tree_a = node_lst.pop(0)
         tree_b = node_lst.pop(0)
+        print("-> tree_a:", tree_a.char, tree_a.freq, "tree_b:", tree_b.char, tree_b.freq)
         node_lst.append(combine_nodes(tree_a, tree_b))
+        display(node_lst)
+        print("====second")
         node_lst.sort()
-    return node_lst[0
+    display(node_lst)
+    print("====end")
+    return node_lst[0]
+
+
+
 
 
 
