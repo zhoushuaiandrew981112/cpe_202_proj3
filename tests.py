@@ -241,11 +241,61 @@ class Test_proj3(unittest.TestCase):
 
         string = "abbcccddddeeeeeffffff"
         freq_lst = get_char_freq(string)
-        print(freq_lst)
         act_tree = create_tree(freq_lst)
 
 
+    def test_create_code(self):
+        
+        exp_code_lst = [""] * 256
 
+        act_code_lst = create_code(None)
+        self.assertEqual(act_code_lst, exp_code_lst)
+
+        string = "abcd abc ab a"
+        freq_lst = get_char_freq(string)
+        act_tree = create_tree(freq_lst)
+        
+        act_code_lst = create_code(act_tree)
+        act_code_lst = create_code(act_tree)
+        act_code_lst = create_code(act_tree)
+        act_code_lst = create_code(act_tree)
+        act_code_lst = create_code(act_tree)
+
+        exp_code_lst = [""] * 256
+        exp_code_lst[ord(" ")] = "00"
+        exp_code_lst[ord("a")] = "11"
+        exp_code_lst[ord("b")] = "01"
+        exp_code_lst[ord("c")] = "101"
+        exp_code_lst[ord("d")] = "100"
+
+        self.assertEqual(act_code_lst, exp_code_lst)
+
+    def test_encode(self):
+
+        string = "abcd abc ab a"
+        exp_code_str = "11011011000011011010011010011"
+        act_code_str = encode(string)
+        act_code_str = encode(string)
+        act_code_str = encode(string)
+        act_code_str = encode(string)
+        act_code_str = encode(string)
+        act_code_str = encode(string)
+
+        self.assertEqual(act_code_str, exp_code_str)
+
+    def test_decode(self):
+        string = "abcd abc ab a"
+        code_str = "11011011000011011010011010011"
+        freq_lst = get_char_freq(string)
+        act_string = decode(code_str, freq_lst)
+        act_string = decode(code_str, freq_lst)
+        act_string = decode(code_str, freq_lst)
+        act_string = decode(code_str, freq_lst)
+        act_string = decode(code_str, freq_lst)
+        
+        self.assertEqual(act_string, string)
+
+        
 
 if __name__ == "__main__":
     unittest.main()

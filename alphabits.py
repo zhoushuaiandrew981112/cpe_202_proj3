@@ -83,7 +83,50 @@ def create_tree(freq_lst):
         tree_b = node_lst.pop(0)
         node_lst.append(combine_nodes(tree_a, tree_b))
         node_lst.sort()
-    return node_lst[0
+    return node_lst[0]
+
+
+def code_gen(code, node, code_lst):
+    if not (node.l_child == None and node.r_child == None):
+        code_gen(code + "0", node.l_child, code_lst)
+        code_gen(code + "1", node.r_child, code_lst)
+    else:
+        code_lst[ord(node.char)] = code
+
+
+def create_code(root):
+    lst_len = 256
+    code_lst = [""] * lst_len
+    if root == None:
+        return code_lst
+    code_gen("", root, code_lst)
+    return code_lst 
+
+
+def encode(string):
+    code_lst = create_code(create_tree(get_char_freq(string)))
+    code_str = ""
+    for char in string:
+        code_str += code_lst[ord(char)]
+    return code_str
+
+
+def decode(string, freq_lst):
+    og_str = ""
+    tree = create_tree(freq_lst)
+    current = tree
+    for letter in string:
+        if letter == "0":
+            current = current.l_child
+            if current.l_child == None and current.r_child == None:
+                og_str += current.char
+                current = tree
+        elif letter == "1":
+            current = current.r_child
+            if current.l_child == None and current.r_child == None:
+                og_str += current.char
+                current = tree
+    return og_str
 
 
 
