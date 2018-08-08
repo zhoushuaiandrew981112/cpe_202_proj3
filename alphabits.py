@@ -31,15 +31,6 @@ def comes_before(tree_a, tree_b):
         #return ord(tree_a.char) < ord(tree_b.char)
         return tree_a.char < tree_b.char
     return tree_a.freq < tree_b.freq
-    #if tree_a.freq < tree_b.freq:
-    #    return True
-    #elif tree_a.freq > tree_b.freq:
-    #    return False
-    #elif tree_a.freq == tree_b.freq:
-    #    if ord(tree_a.char) < ord(tree_b.char):
-    #        return True
-    #    elif ord(tree_a.char) > ord(tree_b.char):
-    #        return False
 
 
 def sort_node_lst(node_lst):
@@ -127,6 +118,10 @@ def decode(string, freq_lst):
                 og_str += current.char
                 current = tree
     return og_str
+
+
+
+
 
 
 

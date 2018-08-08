@@ -14,12 +14,16 @@ class Test_proj3(unittest.TestCase):
     def testHuffmanNode__lt__(self):
         n_0 = HuffmanNode("0", 0)
         n_1 = HuffmanNode("1", 1)
+        n_2 = HuffmanNode("2", 2)
+        n_3 = HuffmanNode("3", 3)
+        n_4 = HuffmanNode("4", 4)
+        n_5 = HuffmanNode("5", 5)
         self.assertTrue(n_0 < n_1)
         self.assertTrue(n_1 > n_0)
-        self.assertTrue(n_0 < n_1)
-        self.assertTrue(n_1 > n_0)
-        self.assertTrue(n_0 < n_1)
-        self.assertTrue(n_1 > n_0)
+        self.assertTrue(n_2 < n_3)
+        self.assertTrue(n_3 > n_2)
+        self.assertTrue(n_4 < n_5)
+        self.assertTrue(n_5 > n_4)
 
     def test_get_char_freq_0(self):
         string = "hello"
@@ -126,6 +130,13 @@ class Test_proj3(unittest.TestCase):
         self.assertEqual(new_node.char, node_b_4.char)
 
     def test_create_tree_lst(self):
+        string = " "
+        freq_lst = get_char_freq(string)
+        act_tree = create_tree(freq_lst)
+        self.assertEqual(act_tree.freq, 1)
+        self.assertEqual(act_tree.char, " ")
+        
+
         string = "abcd abc ab a"
         freq_lst = get_char_freq(string)
         act_tree = create_tree(freq_lst)
@@ -204,21 +215,29 @@ class Test_proj3(unittest.TestCase):
         self.assertEqual(act_node_c_2.l_child, None)
         self.assertEqual(act_node_c_2.r_child, None)
 
-        string = "a"
+        string = "hello prof kauffma"
         freq_lst = get_char_freq(string)
         act_tree = create_tree(freq_lst)
+        self.assertEqual(act_tree.freq, 18)
+        self.assertEqual(act_tree.char, " ")
 
-        string = "1"
+        string = "hello coco"
         freq_lst = get_char_freq(string)
         act_tree = create_tree(freq_lst)
+        self.assertEqual(act_tree.freq, 10)
+        self.assertEqual(act_tree.char, " ")
 
-        string = "2"
+        string = "hello marisa"
         freq_lst = get_char_freq(string)
         act_tree = create_tree(freq_lst)
+        self.assertEqual(act_tree.freq, 12)
+        self.assertEqual(act_tree.char, " ")
 
-        string = "3"
+        string = "hello joice"
         freq_lst = get_char_freq(string)
         act_tree = create_tree(freq_lst)
+        self.assertEqual(act_tree.freq, 11)
+        self.assertEqual(act_tree.char, " ")
 
         freq_lst = [0] * 256
         act_tree = create_tree(freq_lst)
@@ -254,13 +273,8 @@ class Test_proj3(unittest.TestCase):
         string = "abcd abc ab a"
         freq_lst = get_char_freq(string)
         act_tree = create_tree(freq_lst)
+        act_code_lst = create_code(act_tree)
         
-        act_code_lst = create_code(act_tree)
-        act_code_lst = create_code(act_tree)
-        act_code_lst = create_code(act_tree)
-        act_code_lst = create_code(act_tree)
-        act_code_lst = create_code(act_tree)
-
         exp_code_lst = [""] * 256
         exp_code_lst[ord(" ")] = "00"
         exp_code_lst[ord("a")] = "11"
@@ -270,27 +284,132 @@ class Test_proj3(unittest.TestCase):
 
         self.assertEqual(act_code_lst, exp_code_lst)
 
+
+        string = "hello prof kauffma"
+        freq_lst = get_char_freq(string)
+        act_tree = create_tree(freq_lst)
+        act_code_lst = create_code(act_tree)
+
+        exp_code_lst = [""] * 256
+        exp_code_lst[ord(" ")] = "1101"       
+        exp_code_lst[ord("a")] = "000"       
+        exp_code_lst[ord("e")] = "0010"       
+        exp_code_lst[ord("f")] = "111"       
+        exp_code_lst[ord("h")] = "0011"       
+        exp_code_lst[ord("k")] = "0100"       
+        exp_code_lst[ord("l")] = "011"       
+        exp_code_lst[ord("m")] = "0101"       
+        exp_code_lst[ord("o")] = "100"       
+        exp_code_lst[ord("p")] = "1010"       
+        exp_code_lst[ord("r")] = "1011"       
+        exp_code_lst[ord("u")] = "1100"       
+
+        string = "hello coco"
+        freq_lst = get_char_freq(string)
+        act_tree = create_tree(freq_lst)
+        act_code_lst = create_code(act_tree)
+
+        exp_code_lst = [""] * 256
+        exp_code_lst[ord(" ")] = "1010"
+        exp_code_lst[ord("c")] = "00"
+        exp_code_lst[ord("e")] = "1011"
+        exp_code_lst[ord("h")] = "100"
+        exp_code_lst[ord("l")] = "01"
+        exp_code_lst[ord("o")] = "11"
+
+        string = "hello marisa"
+        freq_lst = get_char_freq(string)
+        act_tree = create_tree(freq_lst)
+        act_code_lst = create_code(act_tree)
+
+        exp_code_lst = [""] * 256
+        exp_code_lst[ord(" ")] = "000"
+        exp_code_lst[ord("a")] = "101"
+        exp_code_lst[ord("e")] = "1001"
+        exp_code_lst[ord("h")] = "1100"
+        exp_code_lst[ord("i")] = "1101"
+        exp_code_lst[ord("l")] = "111"
+        exp_code_lst[ord("m")] = "000"
+        exp_code_lst[ord("o")] = "001"
+        exp_code_lst[ord("r")] = "010"
+        exp_code_lst[ord("s")] = "011"
+
+        string = "hello joice"
+        freq_lst = get_char_freq(string)
+        act_tree = create_tree(freq_lst)
+        act_code_lst = create_code(act_tree)
+
+        exp_code_lst = [""] * 256
+        exp_code_lst[ord(" ")] = "1010"
+        exp_code_lst[ord("c")] = "1011"
+        exp_code_lst[ord("e")] = "110"
+        exp_code_lst[ord("h")] = "1110"
+        exp_code_lst[ord("i")] = "111"
+        exp_code_lst[ord("j")] = "100"
+        exp_code_lst[ord("l")] = "00"
+        exp_code_lst[ord("o")] = "01"
+
+
     def test_encode(self):
 
         string = "abcd abc ab a"
         exp_code_str = "11011011000011011010011010011"
         act_code_str = encode(string)
-        act_code_str = encode(string)
-        act_code_str = encode(string)
-        act_code_str = encode(string)
-        act_code_str = encode(string)
-        act_code_str = encode(string)
-
         self.assertEqual(act_code_str, exp_code_str)
+
+        string = "hello prof kauffma"
+        act_code_str = encode(string)
+        exp_code_str = "001100100110111001101101010111001111101010000011001111110101000"
+        self.assertEqual(act_code_str, exp_code_str)
+
+        string = "hello coco"
+        act_code_str = encode(string)
+        exp_code_str = "1001011010111101000110011"
+        self.assertEqual(act_code_str, exp_code_str)
+
+        string = "hello marisa"
+        act_code_str = encode(string)
+        exp_code_str = "1100100111111100110000001010101101011101"
+        self.assertEqual(act_code_str, exp_code_str)
+
+        string = "hello joice"
+        act_code_str = encode(string)
+        exp_code_str = "111011000000110101000111111011110"
+        self.assertEqual(act_code_str, exp_code_str)
+
 
     def test_decode(self):
         string = "abcd abc ab a"
         code_str = "11011011000011011010011010011"
         freq_lst = get_char_freq(string)
         act_string = decode(code_str, freq_lst)
+
+        self.assertEqual(act_string, string)
+
+        string = "abcd abc ab a"
+        code_str = "11011011000011011010011010011"
+        freq_lst = get_char_freq(string)
         act_string = decode(code_str, freq_lst)
+
+        self.assertEqual(act_string, string)
+
+        string = "hello coco"
+        code_str = "1001011010111101000110011"
+        freq_lst = get_char_freq(string)
         act_string = decode(code_str, freq_lst)
+
+        self.assertEqual(act_string, string)
+
+        string = "hello marisa"
+        code_str = "1100100111111100110000001010101101011101"
+        freq_lst = get_char_freq(string)
         act_string = decode(code_str, freq_lst)
+
+        self.assertEqual(act_string, string)
+
+        string = "hello joice"
+        code_str = "111011000000110101000111111011110"
+        freq_lst = get_char_freq(string)
         act_string = decode(code_str, freq_lst)
         
         self.assertEqual(act_string, string)
